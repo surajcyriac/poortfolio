@@ -13,13 +13,11 @@ export default defineConfig({
     },
   },
   define: {
-    'process.env': {}, // prevent "process is not defined"
+    'process.env': {}, // prevent "process is not defined" errors
   },
   optimizeDeps: {
     esbuildOptions: {
-      define: {
-        global: 'globalThis',
-      },
+      define: { global: 'globalThis' },
     },
   },
 })
