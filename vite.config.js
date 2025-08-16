@@ -1,19 +1,15 @@
-
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
-
-
 export default defineConfig({
-  plugins: [react(),    tailwindcss(),
-],
-  optimizeDeps: {
-    esbuildOptions: {
-      // Node.js global to browser globalThis
-      define: {
-        global: 'globalThis'
-      }
-    }
-  }
-});
+  plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      buffer: 'buffer',
+    },
+  },
+  define: {
+    'process.env': {}, // avoid "process is not defined" errors
+  },
+})
