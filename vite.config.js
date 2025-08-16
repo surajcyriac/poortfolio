@@ -7,9 +7,19 @@ export default defineConfig({
   resolve: {
     alias: {
       buffer: 'buffer',
+      process: 'process/browser',
+      stream: 'stream-browserify',
+      crypto: 'crypto-browserify',
     },
   },
   define: {
-    'process.env': {}, // avoid "process is not defined" errors
+    'process.env': {}, // prevent "process is not defined"
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      define: {
+        global: 'globalThis',
+      },
+    },
   },
 })
