@@ -32,36 +32,54 @@ import AOS from 'aos';
 // Main App Component
 const App = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isTransitioning, setIsTransitioning] = useState(false);
     
-    // Scroll to top on page reload
-    // useEffect(() => {
-    //     window.scrollTo(0, 0);
-    // }, []);
-    // Smooth scrolling for navigation links
- 
-useEffect(() => {
-  AOS.init();
-}, []);
     useEffect(() => {
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-                // Close mobile menu after clicking a link
-                setIsMobileMenuOpen(false);
-            });
-        });
+        AOS.init();
+    }, []);
+
+    useEffect(() => {
+        const handleNavClick = function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                // Trigger page transition overlay
+                setIsTransitioning(true);
+                
+                // Wait for overlay to appear, then scroll and fade out
+                setTimeout(() => {
+                    targetElement.scrollIntoView({ behavior: 'auto' });
+                    
+                    // Small delay to ensure layout is updated before fading back in
+                    setTimeout(() => {
+                        setIsTransitioning(false);
+                    }, 50);
+                }, 400);
+            }
+            
+            // Close mobile menu after clicking a link
+            setIsMobileMenuOpen(false);
+        };
+
+        const links = document.querySelectorAll('a[href^="#"]');
+        links.forEach(anchor => anchor.addEventListener('click', handleNavClick));
+        
+        return () => {
+            links.forEach(anchor => anchor.removeEventListener('click', handleNavClick));
+        };
     }, []);
     const [view, setView] = useState(false);
   
     return (
         <div className="bg-gray-950 text-gray-100 font-inter">
+            {/* Smooth Page Transition Overlay */}
+            <div 
+                className={`fixed inset-0 bg-gray-950 z-[9999] transition-opacity duration-500 ease-in-out ${
+                    isTransitioning ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                }`}
+            />
             {/* Custom Styles for Glassmorphism and Animations */}
             <style>
                 {`
@@ -220,7 +238,6 @@ useEffect(() => {
                 }
                 `}
             </style>
-            {/* <Blackbackground /> */}
 {/* navbar */}
                         <nav
                             className="bg-gray-900 shadow-xl w-full z-50 py-4 rounded-b-xl border-b border-blue-800 glassmorphic"
@@ -266,6 +283,9 @@ useEffect(() => {
             {/* Hero Section */}
             <LandingSection />
 
+            {/* Metrics Section */}
+            <MetricsSection />
+
             {/* About Section */}
             <AboutSection />
 
@@ -303,27 +323,6 @@ const MobileNavLink = ({ href, text }) => (
         {text}
     </a>
 );
-
-// Interactive ID Card Component (simplified to match the image)
-// const InteractiveIDCard = () => {
-//     return (
-//         <div className="relative w-40 h-56 bg-black rounded-xl shadow-lg flex items-center justify-center p-4">
-//             {/* Simple SVG for the logo, similar to the image */}
-            
-
-
-            
-//             {/* <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-//                 <circle cx="50" cy="50" r="40" stroke="#333" strokeWidth="4"/>
-//                 <path d="M50 10 L50 90 M10 50 L90 50" stroke="#333" strokeWidth="4"/>
-//                 <circle cx="25" cy="25" r="10" fill="#333"/>
-//                 <circle cx="75" cy="25" r="10" fill="#333"/>
-//                 <circle cx="25" cy="75" r="10" fill="#333"/>
-//                 <circle cx="75" cy="75" r="10" fill="#333"/>
-//             </svg> */}
-//         </div>
-//     );
-// };
 
  const Blackbackground = () => {
     const [view, setView] = useState(false);
@@ -363,34 +362,6 @@ const AnimatedBlueText = ({ text }) => {
         </span>
     );
 };
-
-// Hero Section Component
-// const HeroSection = () => {
-//     return (
-//         <section id="hero" className="relative bg-gradient-to-br from-gray-950 to-indigo-950 text-white py-24 md:py-32 flex items-center justify-center min-h-screen overflow-hidden">
-//             {/* Background Blue Text Effect */}
-//             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-5 pointer-events-none z-0 space-y-8">
-//                 <AnimatedBlueText text="ELEGANCE" />
-//                 <AnimatedBlueText text="INNOVATE" />
-//                 <AnimatedBlueText text="DESIGN" />
-//             </div>
-
-//             {/* Hanging ID Card - positioned absolutely in the center */}
-//             {/* <div className="hanging-id-card-container z-20">
-//                 <div className="lanyard"></div>
-//                 <InteractiveIDCard />
-//             </div> */}
-
-//             {/* Text content behind the ID card, adjusted for visibility */}
-//             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-10 opacity-30 md:opacity-20"> {/* Increased opacity */}
-//                 <h1 className="text-7xl md:text-8xl font-extrabold leading-tight text-blue-300">
-//                     DRIVE IT!
-//                 </h1>
-//             </div>
-//         </section>
-//     );
-// };
-
 
 // This is the main component for your landing section.
 const LandingSection = () => {
@@ -654,30 +625,42 @@ const LandingSection = () => {
                         <a href={resumePdf} download="Suraj_Cyriac_Resume.pdf" className="cta-button inline-block text-lg font-semibold bg-blue-600 border-2 border-blue-600 rounded-md py-3 px-8 text-white transition-all duration-300 hover:bg-blue-700 hover:border-blue-700 hover:shadow-[0_0_25px_rgba(29,78,216,0.8)]">
                             Download Resume
                         </a>
-                        
-                        {/* The new Gemini-powered button */}
-                        {/* <button
-                            onClick={handleReimagineBio}
-                            disabled={isGenerating}
-                            className="gemini-button inline-flex items-center justify-center text-lg font-semibold border-2 rounded-md py-3 px-8"
-                        >
-                            {isGenerating ? 'Generating...' : '✨ Reimagine Bio'}
-                        </button> */}
                     </div>
                 </div>
             </section>
-            
-            {/* <section id="projects" className="h-screen flex items-center justify-center relative z-10">
-                <h2 className="text-4xl text-white">Your Projects Would Go Here</h2>
-            </section> */}
         </>
     );
 };
 
-// export default LandingSection;
+// Metrics Section Component
+const MetricsSection = () => {
+    const metrics = [
+        { number: "2+", label: "Years of Experience", icon: <Briefcase size={36} className="text-blue-500 mb-4 mx-auto" /> },
+        { number: "10+", label: "Projects Completed", icon: <Code size={36} className="text-blue-500 mb-4 mx-auto" /> },
+        { number: "2", label: "Internships", icon: <Award size={36} className="text-blue-500 mb-4 mx-auto" /> },
+        { number: "13", label: "Technologies Mastered", icon: <Atom size={36} className="text-blue-500 mb-4 mx-auto" /> }
+    ];
 
-
-
+    return (
+        <section className="bg-gray-900 py-16 md:py-20 relative z-10 border-y border-gray-800">
+            <div className="container mx-auto px-4 md:px-8">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+                    {metrics.map((metric, index) => (
+                        <div key={index} data-aos="zoom-in" data-aos-delay={index * 100} className="flex flex-col items-center justify-center text-center p-6 bg-gray-800/40 rounded-2xl border border-gray-700/50 hover:border-blue-500/50 hover:bg-gray-800 transition-all duration-300 group shadow-lg">
+                            {metric.icon}
+                            <div className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-100 mb-3 tracking-tight group-hover:text-blue-400 transition-colors duration-300">
+                                {metric.number}
+                            </div>
+                            <div className="text-gray-400 text-xs md:text-sm font-semibold uppercase tracking-widest">
+                                {metric.label}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
 
 // About Section Component
 const AboutSection = () => {
@@ -754,10 +737,6 @@ const TechSkillsSection = () => {
         { name: "GitLab", icon: gitLab },
         { name: "Tailwind CSS", icon: tailwind },
         { name: "Postman", icon: postman },
-        // { name: "Redux", icon: GitBranch },
-        // { name: "Webpack", icon: Package },
-        // { name: "REST APIs", icon: Network },
-        // { name: "VS Code", icon: Code },
     ];
 
     return (
@@ -766,12 +745,9 @@ const TechSkillsSection = () => {
                 style={{
                     position: 'absolute',
                     top: 0,
-                    // left: 0,
                     width: '100%',
                     height: '100%',
                     zIndex: 0,
-                    // border:'solid'
-                    // pointerEvents: 'none',
                 }}
             >
                 <Particles
@@ -824,13 +800,6 @@ const ExperienceSection = () => {
   "duration": "June 2024 – December 2024",
   "description": "Completed hands-on training and project work in the MERN stack (MongoDB, Express.js, React, Node.js). Developed full-stack applications and implemented CRUD operations with proper routing and state management. Gained practical experience with RESTful APIs, authentication, and component-based architecture in React. Collaborated with peers on mini-projects and followed Agile development practices."
 }
-
-        // {
-        //     title: "Junior Web Developer",
-        //     company: "Startup X",
-        //     duration: "Sep 2017 - Jun 2019",
-        //     description: "Assisted in front-end development, bug fixing, and feature implementation for various client projects. Gained foundational knowledge in web technologies."
-        // }
     ];
 
     return (
@@ -844,7 +813,6 @@ const ExperienceSection = () => {
                     width: '100%',
                     height: '100%',
                     zIndex: 0,
-                    // pointerEvents: 'none',
                 }}
             >
                 <Particles
@@ -980,21 +948,6 @@ const ProjectCard = ({ title, description, image, link, github, techStack }) => 
         </div>
     </motion.div>
 );
-    // return (
-    //     <section id="portfolio" className="bg-gray-950 py-20 md:py-24">
-    //         <div className="container mx-auto px-4 md:px-8">
-    //             <h2 className="text-4xl font-bold text-center text-white mb-12 relative pb-4">
-    //                 My Portfolio
-    //                 <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-blue-600 rounded-full"></span>
-    //             </h2>
-    //             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    //                 {projects.map((project, index) => (
-    //                     <ProjectCard key={index} {...project} />
-    //                 ))}
-    //             </div>
-    //         </div>
-    //     </section>
-    // );
     return (
         <section id="portfolio" className="bg-black py-20">
             <div className="container mx-auto px-4" >
