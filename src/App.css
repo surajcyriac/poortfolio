@@ -1,4 +1,4 @@
-@keyframes scroll {
+/* @keyframes scroll {
     0% {
         transform: translateX(0%);
     }
@@ -9,4 +9,16 @@
 
 .animate-scroll {
     animation: scroll 60s linear infinite;
+} */
+.typewriter-text {
+  border-right: 2px solid #fff;
+  white-space: normal;        /* ← allows wrapping */
+  overflow: visible;          /* ← shows all text */
+  display: inline;
+  animation: blink 0.75s step-end infinite;  /* ← keep only cursor blink */
+}
+
+@keyframes blink {
+  from, to { border-color: transparent }
+  50% { border-color: #fff }
 }

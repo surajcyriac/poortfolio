@@ -23,6 +23,7 @@ import projectfair from '../assets/images/projectfair.png' // Adjust the path if
 import recipe from '../assets/images/recipe.png' // Adjust the path if needed
 import weather from '../assets/images/weather.png' // Adjust the path if needed
 import tictactoe from '../assets/images/tictactoe.png' // Adjust the path if needed
+import resumePdf from '../assets/resume/Suraj_Cyriac_Resume.pdf';
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import FadeIn from "../assets/Fadein";
@@ -233,8 +234,11 @@ useEffect(() => {
                                     <NavLink href="#tech-skills" text="Skills" />
                                     <NavLink href="#portfolio" text="Portfolio" />
                                     <NavLink href="#vision-passion" text="Vision" /> {/* Updated href and text */}
-                        <NavLink href="#contact" text="Contact" />
-                    </div>
+                                    <NavLink href="#contact" text="Contact" />
+                                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-blue-400 transition duration-300 flex items-center">
+                                        <Github size={20} />
+                                    </a>
+                                </div>
                     {/* Mobile Menu Button */}
                     <button
                         id="mobile-menu-button"
@@ -624,16 +628,18 @@ const LandingSection = () => {
             
             <section className="hero-section relative flex items-center justify-center min-h-screen p-4 overflow-hidden">
                 <canvas id="particle-canvas" ref={canvasRef}></canvas>
-                <div className="relative z-10 text-center w-full max-w-4xl mx-auto">
+                <div className="relative z-10 text-center w-full  mx-auto">
                     <p className="font-mono text-lg md:text-xl text-blue-400 mb-2 sm:mb-4 opacity-0 fade-in-1">
                         Hi, my name is
                     </p>
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-gray-100 mb-3 sm:mb-5 opacity-0 fade-in-2">
                         Suraj Cyriac Jes.
                     </h1>
-                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-400 opacity-0 fade-in-3">
-                        <span className="typewriter-text">I build solutions for the web.</span>
-                    </h2>
+           <h2 className="text-3xl max-w-6xl w-full text-wrap  mx-auto md:text-5xl lg:text-6xl font-bold text-gray-400 opacity-0 fade-in-3">
+  <span className="typewriter-text block wrap-balance whitespace-normal break-words">
+    I build fast, scalable MERN <br /> applications from idea to deployment.
+  </span>
+</h2>
                     
                     {/* The bio now uses the state variable, so it can be updated. */}
                     <p className="max-w-2xl mx-auto mt-6 md:mt-8 text-base md:text-lg text-gray-300 leading-relaxed opacity-0 fade-in-4 transition-all duration-500">
@@ -644,6 +650,9 @@ const LandingSection = () => {
                     <div className="mt-8 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 fade-in-5">
                         <a href="#portfolio" className="cta-button inline-block text-lg font-semibold bg-transparent border-2 rounded-md py-3 px-8 text-blue-400 transition-all duration-300 hover:text-white hover:bg-blue-700/20">
                             Explore My Work
+                        </a>
+                        <a href={resumePdf} download="Suraj_Cyriac_Resume.pdf" className="cta-button inline-block text-lg font-semibold bg-blue-600 border-2 border-blue-600 rounded-md py-3 px-8 text-white transition-all duration-300 hover:bg-blue-700 hover:border-blue-700 hover:shadow-[0_0_25px_rgba(29,78,216,0.8)]">
+                            Download Resume
                         </a>
                         
                         {/* The new Gemini-powered button */}
@@ -697,7 +706,7 @@ const AboutSection = () => {
         <section id="about" className="bg-gray-900 py-20 md:py-24">
             <div data-aos="fade-up" className="container mx-auto px-4 md:px-8">
                 <h2 className="text-4xl font-bold text-center text-white mb-12 relative pb-4">
-                    Unveiling My Expertise
+                    About Me
                     <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-blue-600 rounded-full"></span>
                 </h2>
                 <div className="text-lg text-gray-300 leading-relaxed text-center max-w-3xl mx-auto mb-12">
@@ -881,14 +890,18 @@ const PortfolioSection = () => {
   title: "Open Library",
   description: "A MERN-based open library platform where users can sign up, add books, and freely read others' books. Includes an admin dashboard to regulate book entries. Built using MongoDB for data storage and authentication.",
   image: book,
-  link: "https://my-project-coral-six.vercel.app/"
+  link: "https://my-project-coral-six.vercel.app/",
+  github: "https://github.com/surajcyriac",
+  techStack: "MongoDB, Express, React, Node.js"
 }
 ,
     {
   title: "Chat Platform",
   description: "A simple and responsive chat application built using Firebase. Supports real-time messaging and user authentication with minimal UI for quick interactions.",
   image: chatapp,
-  link: "https://chatapp-rouge-one.vercel.app/"
+  link: "https://chatapp-rouge-one.vercel.app/",
+  github: "https://github.com/surajcyriac",
+  techStack: "React, Firebase, Tailwind CSS"
 }
 ,
     
@@ -896,59 +909,74 @@ const PortfolioSection = () => {
   title: "Task Manager",
   description: "A MERN stack productivity app that allows users to add, manage, and update tasks. Built with React and MongoDB, featuring a clean UI and CRUD operations for efficient task tracking.",
   image: taskmamager,
-  link: "https://taskmanagemant.vercel.app/"
+  link: "https://taskmanagemant.vercel.app/",
+  github: "https://github.com/surajcyriac",
+  techStack: "MongoDB, Express, React, Node.js"
 }
 ,
     {
     title: "ProjectFair Site",
     description: "Developer portfolio using React, Tailwind CSS and Framer Motion. Highlights projects with animation and responsiveness.",
     image: projectfair,
-    link: "https://project-fair-murex.vercel.app/"
+    link: "https://project-fair-murex.vercel.app/",
+    github: "https://github.com/surajcyriac",
+    techStack: "React, Tailwind CSS, Framer Motion"
   },
      {
     title: "Recipe Manager",
     description: "A recipe management dashboard for admins with analytics and data visualizations. Built with MongoDB, Node.js, and Chart.js.",
     image: recipe,
-    link: "https://recipeapp-orpin.vercel.app/"
+    link: "https://recipeapp-orpin.vercel.app/",
+    github: "https://github.com/surajcyriac",
+    techStack: "MongoDB, Node.js, Chart.js"
   },
     {
   title: "Live Weather App",
   description: "A real-time weather application that fetches live data from an external weather API. Users can search for cities and view current weather conditions with a clean, responsive interface.",
   image: weather,
-  link: "https://react-weather-app-ruby-two.vercel.app/"
+  link: "https://react-weather-app-ruby-two.vercel.app/",
+  github: "https://github.com/surajcyriac",
+  techStack: "React, OpenWeatherMap API, CSS"
 }
 ,
     {
     title: "Tic Tac Toe Game",
     description: "Classic Tic Tac Toe game developed with MERN stack. Engaging UI with reset and win-checking functionality.",
     image: tictactoe,
-    link: "https://gamingapp-gamma.vercel.app/"
+    link: "https://gamingapp-gamma.vercel.app/",
+    github: "https://github.com/surajcyriac",
+    techStack: "React, Node.js, Express, MongoDB"
   }
 ];
-const ProjectCard = ({ title, description, image, link }) => (
+const ProjectCard = ({ title, description, image, link, github, techStack }) => (
     <motion.div
         whileHover={{ scale: 1.05 }}
-        className="relative group rounded-2xl overflow-hidden shadow-xl border border-blue-800 bg-black/30 backdrop-blur-lg"
+        className="relative group rounded-2xl overflow-hidden shadow-xl border border-blue-800 bg-black/30 backdrop-blur-lg flex flex-col"
       style={{
         width: '320px',      // Fixed width
-        // height: '400px',     // Fixed height
         minWidth: '320px',   // Prevent shrinking in flex layouts
-        // minHeight: '400px',
-        // display: 'flex',
-        // flexDirection: 'column',
-        // justifyContent: 'flex-end',
     }}>
-        <img src={image} alt={title} className="w-full h-56  group-hover:opacity-30 transition duration-300" />
-        <div className="absolute inset-0 flex flex-col justify-end p-5 opacity-0 group-hover:opacity-100 transition duration-300 text-white">
+        <img src={image} alt={title} className="w-full h-48 object-cover group-hover:opacity-10 transition duration-300" />
+        <div className="absolute inset-0 flex flex-col justify-center p-5 opacity-0 group-hover:opacity-100 transition duration-300 text-white bg-black/80">
             <h3 className="text-xl font-bold text-blue-400 mb-2">{title}</h3>
-            <p className="text-sm text-gray-200 mb-4">{description}</p>
-            <a
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-blue-500 hover:underline"
-            > View Project <ExternalLink size={16} />
-            </a>
+            <p className="text-sm text-gray-200 mb-2 line-clamp-3">{description}</p>
+            <p className="text-xs text-blue-300 mb-4 font-mono">{techStack}</p>
+            <div className="flex gap-4 mt-auto">
+                <a
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm font-semibold bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded transition-colors"
+                > <ExternalLink size={14} /> Live Demo
+                </a>
+                <a
+                    href={github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm font-semibold bg-gray-700 hover:bg-gray-600 px-3 py-1.5 rounded transition-colors"
+                > <Github size={14} /> GitHub
+                </a>
+            </div>
         </div>
     </motion.div>
 );
@@ -1020,7 +1048,7 @@ const MyVisionPassionSection = () => {
                </FadeIn>
                <FadeIn>
                     <p className="text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto mb-10">
-                        As a passionate and aspiring developer, I am driven by the endless possibilities of technology to create innovative solutions and delightful user experiences. I thrive on continuous learning, embracing new challenges, and contributing to projects that make a real impact. My journey is just beginning, and I'm eager to bring my creativity, problem-solving skills, and dedication to a dynamic team.
+                        As a passionate and aspiring developer, I am driven by the endless possibilities of technology to create innovative solutions and delightful user experiences. I thrive on continuous learning, embracing new challenges, and contributing to projects that make a real impact. I am currently open to remote work opportunities where I can bring my creativity, problem-solving skills, and dedication to a dynamic team.
                     </p>
                </FadeIn>
                <FadeIn>
@@ -1038,30 +1066,34 @@ const ContactSection = () => {
     const [name,setName]=useState("");
     const [email,setEmail]=useState("");
     const [message,setMessage]=useState("");
-     const handleSubmit = () => {
-        // For example, send the data to an API or email service
-        fetch("https://formspree.io/f/xwkzqgqv", {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name,
-                email,
-                message,
-                _replyto: email,
-                _subject: "Portfolio Contact Form Submission",
-                to: "surajcyriac@gmail.com"
-            })
-        });
-        console.log("Form submitted:", { name, email, message });
-
-        setName("");
-        setEmail("");
-        setMessage("");
-
-     }
+    const [status, setStatus] = useState("");
+     const handleSubmit = async (e) => {
+        e.preventDefault();
+        setStatus("Sending...");
+        try {
+            await fetch("https://formspree.io/f/xwkzqgqv", {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    message,
+                    _replyto: email,
+                    _subject: "Portfolio Contact Form Submission",
+                    to: "surajcyriac@gmail.com"
+                })
+            });
+            setStatus("Success! Your message has been sent.");
+            setName("");
+            setEmail("");
+            setMessage("");
+        } catch (error) {
+            setStatus("Error! Please try again later.");
+        }
+     };
 
     return (
         <section id="contact" className="bg-gradient-to-br from-blue-800 to-purple-900 text-white py-20 md:py-24">
@@ -1139,6 +1171,7 @@ const ContactSection = () => {
                                 <button onClick={handleSubmit} type="submit" className="inline-block bg-blue-500 text-white hover:bg-blue-600 px-8 py-4 rounded-full text-lg font-semibold shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
                                     Send Message
                                 </button>
+                                {status && <p className="mt-4 text-green-400 font-medium">{status}</p>}
                            </FadeIn>
                         </div>
                     </form>
@@ -1153,7 +1186,7 @@ const Footer = () => {
     return (
         <footer className="bg-gray-900 text-gray-400 py-10 rounded-t-xl border-t border-blue-800">
             <div className="container mx-auto px-4 md:px-8 text-center">
-                <p>&copy; 2025 Suraj Cyriac Jes. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} Suraj Cyriac Jes. All rights reserved.</p>
                 <div className="flex justify-center space-x-6 mt-4">
                     <a href="https://www.linkedin.com/in/surajcyriacjes/" className="text-gray-400 hover:text-blue-400 transition duration-300"><Linkedin size={24} /></a>
                     <a href="https://github.com/surajcyriac" className="text-gray-400 hover:text-blue-400 transition duration-300"><Github size={24} /></a>
