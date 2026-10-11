@@ -340,11 +340,11 @@ const Navbar = () => {
                 <span className="relative">{t}</span>
               </a>
             ))}
-            <a href={resumePdf} download="Suraj_Cyriac_Resume.pdf" className="rounded-full px-4 py-2 text-sm font-semibold text-[#f2b441] hover:text-[#ffc85c]">Resume</a>
+            <a href={resumePdf} download="suraj_cyriac.pdf" className="rounded-full px-4 py-2 text-sm font-semibold text-[#f2b441] hover:text-[#ffc85c]">Resume</a>
           </nav>
           {/* Mobile */}
           <div className="flex items-center justify-between px-5 py-2.5 md:hidden">
-            <a href={resumePdf} download="Suraj_Cyriac_Resume.pdf" className="text-sm font-semibold text-[#f2b441]">Resume</a>
+            <a href={resumePdf} download="suraj_cyriac.pdf" className="text-sm font-semibold text-[#f2b441]">Resume</a>
             <button className="text-[#e8edf5]" onClick={() => setOpen(!open)} aria-label="Toggle menu" aria-expanded={open}>
               {open ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -527,7 +527,7 @@ const Hero = () => (
 
         {/* step 2: the two buttons */}
         <Fade step={2} className="mt-8 flex flex-wrap gap-3">
-          <LinkBtn solid href={resumePdf} download="Suraj_Cyriac_Resume.pdf"><Download size={18} /> Download resume</LinkBtn>
+          <LinkBtn solid href={resumePdf} download="suraj_cyriac.pdf"><Download size={18} /> Download resume</LinkBtn>
           <LinkBtn href="#catalyst">Read the Catalyst PSC case study</LinkBtn>
         </Fade>
       </div>
