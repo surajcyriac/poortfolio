@@ -28,7 +28,7 @@ import adminQuiz from '../assets/images/admin_quiz.png';
 import adminAnnouncements from '../assets/images/admin_announcements.png';
 // import adminHome from '../assets/images/admin_home.png'; // shows "0 videos" -> retake with real data before using
 
-import resumePdf from '../assets/resume/SURAJ_CYRIAC_RESUME.pdf';
+import resumePdf from '../assets/resume/suraj_cyriac.pdf';
 
 /* ---------------------------------- DATA ---------------------------------- */
 
