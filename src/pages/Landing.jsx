@@ -21,6 +21,8 @@ import postman from '../assets/icons/Postman.png';
 
 // Project images
 import book from '../assets/images/book.png';
+import spectrum from '../assets/images/spectrum.png';
+import dietcraft from '../assets/images/dietcraft.png';
 import weather from '../assets/images/weather.png';
 import poster from '../assets/images/poster.png';
 import landing from '../assets/images/landing.png';
@@ -119,6 +121,7 @@ const PROJECTS = [
     title: 'DietCraft',
     text: 'Generates diet and workout plans with an LLM. The Express API is rate limited and returns schema-checked JSON, with a fallback when no API key is set. A six-step form calculates BMR and TDEE live and filters food by country and state.',
     tech: ['React', 'TypeScript', 'Node.js', 'Express', 'OpenRouter'],
+    image:dietcraft,
     github: 'https://github.com/surajcyriac/dietmaker',
   },
   {
@@ -133,6 +136,7 @@ const PROJECTS = [
     title: 'Spectrum Visionary',
     text: 'Client product page for an electronics shop, built from a Figma design and optimised for its many photos and animations.',
     tech: ['Client work', 'Figma to code', 'Performance'],
+    image: spectrum,
     live: 'https://spectrumvisionary.com/',
   },
   {
@@ -199,6 +203,7 @@ const Fade = ({ step = 0, className, children }) => {
   return (
     <motion.div
       className={className}
+      style={{ willChange: 'opacity' }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={reduce ? { duration: 0 } : { duration: FADE, delay: step * STEP, ease: 'easeOut' }}
@@ -410,16 +415,14 @@ const IconLink = ({ href, label, children, ...rest }) => (
     aria-label={label}
     title={label}
     {...rest}
-    className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-[#e8edf5] backdrop-blur-xl transition-colors hover:border-[#f2b441] hover:text-[#f2b441]"
-  >
+className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-[#17253d]/90 text-[#e8edf5] transition-colors hover:border-[#f2b441] hover:text-[#f2b441]"  >
     {children}
   </a>
 );
 
 const StatChip = ({ n, label, className, delay }) => (
   <div
-    className={`hero-float absolute rounded-xl border border-white/20 bg-white/10 px-4 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl ${className}`}
-    style={{ animationDelay: delay }}
+className={`hero-float absolute rounded-xl border border-white/20 bg-[#17253d]/90 px-4 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.4)] ${className}`}    style={{ animationDelay: delay }}
   >
     <span className="font-display text-xl font-bold text-[#f4f6fb]">{n}</span>{' '}
     <span className="text-sm text-[#b4c0d3]">{label}</span>
@@ -463,8 +466,7 @@ const ProductShot = () => {
 
       <a
         href="#catalyst"
-        className="absolute left-4 top-0 flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-[#f4f6fb] shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl hover:border-[#f2b441]"
-      >
+className="absolute left-4 top-0 flex items-center gap-2 rounded-full border border-white/20 bg-[#17253d]/90 px-4 py-2 text-sm text-[#f4f6fb] shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[#f2b441]"      >
         <span className="relative flex h-2.5 w-2.5">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
           <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
